@@ -20,26 +20,35 @@ public class HelloController  implements Initializable  {
 
     @FXML
     private AnchorPane anchorpane;
+    @FXML
+    private Circle circle;
+    @FXML
+    private Circle circle2;
+
+
+
+    private Thread thread;
+    private Thread thread1;
+
+    private RunIt runIt;
+    private RunIt rutIt2;
+
 
     public AnchorPane getAnchorpane() {
         return anchorpane;
     }
 
-    @FXML
-    private Circle circle;
-    @FXML
-    private Circle circle2;
-    private Thread thread;
-    private Thread thread1;
+    public Circle getCircle() {
+        return circle;
+    }
 
-   private RunIt runIt;
-   private RunIt rutIt2;
-
-
-
+    public Circle getCircle2() {
+        return circle2;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         Bridge.setHelloController(this);
 
 
@@ -51,15 +60,18 @@ public class HelloController  implements Initializable  {
 
 
 
-        try {
+
             thread.start();
 
-            Thread.sleep(10);
+            thread1.start();
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        thread1.start();
+
+
+
+
+
+
+
 
 
     }

@@ -21,37 +21,66 @@ public class RunIt implements Runnable{
         this.circle = circle;
     }
 
+   private double directionX = 2;
+   private double directionY = 2;
+    Circle c1 = Bridge.getHelloController().getCircle();
+    Circle c2 = Bridge.getHelloController().getCircle2();
 
+    public boolean checkCollision(){
 
+        // dx = vertical distance between sphere and other sphere
+        // dy = horizontal distance between sphere and other sphere
+        double dx = c1.getLayoutX() - c2.getLayoutX();
+        double dy = c1.getLayoutY() - c2.getLayoutY();
+        // d = distance between the centre of each sphere; Pythagoras' Theorem
+        double distance = Math.sqrt((dy * dy) + (dx * dx));
+        // return true if the distance between the spheres is lower than their radius, false if not
+        return (distance <= (c1.getRadius() + c2.getRadius()));
+    }
 
     @Override
     public void run() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
-            double deltaX = 2;
-            double deltaY = 2;
+
             @Override
             public void handle(ActionEvent event) {
                 try {
+
                     Bounds bounds = Bridge.getHelloController().getAnchorpane().getBoundsInLocal();
-                    circle.setLayoutX(circle.getLayoutX() + deltaX);
-                    circle.setLayoutY(circle.getLayoutY() + deltaY);
+
+
+
+                    circle.setLayoutX(circle.getLayoutX() + directionX);
+                    circle.setLayoutY(circle.getLayoutY() + directionY);
+
 
                     boolean rightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
                     boolean leftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
                     boolean bottomBorder = circle.getLayoutY() >= (bounds.getMaxY() - circle.getRadius());
                     boolean topBorder = circle.getLayoutY() <= (bounds.getMinY() + circle.getRadius());
 
-                    if (rightBorder || leftBorder) {
-                        deltaX *= -1;
+
+
+                        if (rightBorder || leftBorder) {
+                            directionX *= -1;
+                        }
+                        if (bottomBorder || topBorder) {
+                            directionY *= -1;
+                        }
+
+                        if (checkCollision()){
+                        directionX *= -1;
+                        directionY *= -1;
                     }
-                    if (bottomBorder || topBorder) {
-                        deltaY *= -1;
-                    }
+
+
+
 
 
                 } catch (Exception e){
                     e.printStackTrace();
                 }
+
 
             }
         }));
