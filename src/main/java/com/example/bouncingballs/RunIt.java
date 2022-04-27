@@ -12,10 +12,13 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.util.concurrent.Semaphore;
+
+import static java.lang.Thread.sleep;
+
 public class RunIt implements Runnable{
 
-
-    private Circle circle;
+     private Circle circle;
 
     public RunIt( Circle circle) {
         this.circle = circle;
@@ -40,6 +43,21 @@ public class RunIt implements Runnable{
 
     @Override
     public void run() {
+
+
+
+
+
+//it fixes the deadlock of the balls
+
+            synchronized (c1) {
+                try {
+                    sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
 
             @Override

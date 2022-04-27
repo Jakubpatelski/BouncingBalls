@@ -27,12 +27,16 @@ public class HelloController  implements Initializable  {
 
 
 
-    private Thread thread;
-    private Thread thread1;
+
+
+
+
 
     private RunIt runIt;
     private RunIt rutIt2;
 
+     private Thread thread;
+     private Thread thread2 ;
 
     public AnchorPane getAnchorpane() {
         return anchorpane;
@@ -51,21 +55,15 @@ public class HelloController  implements Initializable  {
 
         Bridge.setHelloController(this);
 
-
         runIt = new RunIt(circle);
         rutIt2 = new RunIt(circle2);
 
         thread = new Thread(runIt);
-        thread1 = new Thread(rutIt2);
+        thread2 = new Thread(rutIt2);
 
 
-
-
-            thread.start();
-
-            thread1.start();
-
-
+       thread.start();
+      thread2.start();
 
 
 
