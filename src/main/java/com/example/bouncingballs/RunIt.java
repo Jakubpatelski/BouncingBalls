@@ -30,12 +30,11 @@ public class RunIt implements Runnable{
     Circle c2 = Bridge.getHelloController().getCircle2();
 
     public boolean checkCollision(){
-
         // dx = vertical distance between sphere and other sphere
         // dy = horizontal distance between sphere and other sphere
         double dx = c1.getLayoutX() - c2.getLayoutX();
         double dy = c1.getLayoutY() - c2.getLayoutY();
-        // d = distance between the centre of each sphere; Pythagoras' Theorem
+        // distance = distance between the centre of each sphere; Pythagoras' Theorem
         double distance = Math.sqrt((dy * dy) + (dx * dx));
         // return true if the distance between the spheres is lower than their radius, false if not
         return (distance <= (c1.getRadius() + c2.getRadius()));
@@ -43,13 +42,7 @@ public class RunIt implements Runnable{
 
     @Override
     public void run() {
-
-
-
-
-
 //it fixes the deadlock of the balls
-
             synchronized (c1) {
                 try {
                     sleep(10);
@@ -66,22 +59,18 @@ public class RunIt implements Runnable{
 
                     Bounds bounds = Bridge.getHelloController().getAnchorpane().getBoundsInLocal();
 
-
-
                     circle.setLayoutX(circle.getLayoutX() + directionX);
                     circle.setLayoutY(circle.getLayoutY() + directionY);
-
 
                     boolean rightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
                     boolean leftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
                     boolean bottomBorder = circle.getLayoutY() >= (bounds.getMaxY() - circle.getRadius());
                     boolean topBorder = circle.getLayoutY() <= (bounds.getMinY() + circle.getRadius());
 
-
-
                         if (rightBorder || leftBorder) {
                             directionX *= -1;
                         }
+
                         if (bottomBorder || topBorder) {
                             directionY *= -1;
                         }
@@ -92,24 +81,15 @@ public class RunIt implements Runnable{
                     }
 
 
-
-
-
                 } catch (Exception e){
                     e.printStackTrace();
                 }
 
-
             }
         }));
+
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-
     }
-
-
-
-
-
 }

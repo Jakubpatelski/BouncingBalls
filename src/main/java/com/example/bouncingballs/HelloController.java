@@ -25,18 +25,11 @@ public class HelloController  implements Initializable  {
     @FXML
     private Circle circle2;
 
-
-
-
-
-
-
-
     private RunIt runIt;
     private RunIt rutIt2;
 
-     private Thread thread;
-     private Thread thread2 ;
+    private Thread thread;
+    private Thread thread2 ;
 
     public AnchorPane getAnchorpane() {
         return anchorpane;
@@ -52,7 +45,6 @@ public class HelloController  implements Initializable  {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         Bridge.setHelloController(this);
 
         runIt = new RunIt(circle);
@@ -61,17 +53,8 @@ public class HelloController  implements Initializable  {
         thread = new Thread(runIt);
         thread2 = new Thread(rutIt2);
 
-
-       thread.start();
-      thread2.start();
-
-
-
-
-
-
-
-
+        thread.start();
+        thread2.start();
     }
 
 }
