@@ -3,9 +3,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="816.0" prefWidth="992.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bouncingballs.HelloController">
+<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1600.0" prefWidth="2560.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bouncingballs.HelloController">
    <children>
-   <Circle fx:id="circle" fill="DODGERBLUE" layoutX="454.0" layoutY="202.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="circle2" fill="DODGERBLUE" layoutX="586.0" layoutY="202.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="circle" fill="DODGERBLUE" layoutX="427.0" layoutY="229.0" radius="52.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="circle2" fill="DODGERBLUE" layoutX="409.0" layoutY="516.0" radius="52.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

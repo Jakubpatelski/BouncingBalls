@@ -12,22 +12,23 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 import static java.lang.Thread.sleep;
 
 public class RunIt implements Runnable{
+    private Circle circle;
 
-     private Circle circle;
-
-    public RunIt( Circle circle) {
+    public RunIt(Circle circle) {
         this.circle = circle;
     }
 
-   private double directionX = 2;
-   private double directionY = 2;
-    Circle c1 = Bridge.getHelloController().getCircle();
-    Circle c2 = Bridge.getHelloController().getCircle2();
+   private double directionX =3;
+   private double directionY =3;
+
+   Circle c1 = Bridge.getHelloController().getCircle();
+   Circle c2 = Bridge.getHelloController().getCircle2();
 
     public boolean checkCollision(){
         // dx = vertical distance between sphere and other sphere
@@ -42,52 +43,40 @@ public class RunIt implements Runnable{
 
     @Override
     public void run() {
-//it fixes the deadlock of the balls
-            synchronized (c1) {
+            synchronized (circle) {
+                System.out.println(Thread.currentThread().getName() );
                 try {
-                    sleep(10);
+                    sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent event) {
                 try {
-
                     Bounds bounds = Bridge.getHelloController().getAnchorpane().getBoundsInLocal();
-
                     circle.setLayoutX(circle.getLayoutX() + directionX);
                     circle.setLayoutY(circle.getLayoutY() + directionY);
-
                     boolean rightBorder = circle.getLayoutX() >= (bounds.getMaxX() - circle.getRadius());
                     boolean leftBorder = circle.getLayoutX() <= (bounds.getMinX() + circle.getRadius());
                     boolean bottomBorder = circle.getLayoutY() >= (bounds.getMaxY() - circle.getRadius());
                     boolean topBorder = circle.getLayoutY() <= (bounds.getMinY() + circle.getRadius());
-
                         if (rightBorder || leftBorder) {
                             directionX *= -1;
                         }
-
                         if (bottomBorder || topBorder) {
                             directionY *= -1;
                         }
-
                         if (checkCollision()){
                         directionX *= -1;
                         directionY *= -1;
                     }
-
-
                 } catch (Exception e){
                     e.printStackTrace();
                 }
-
             }
         }));
-
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
